@@ -2,34 +2,88 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "connections_1_hub_name": {
+            "value": null
+        },
+        "connections_2_hub_name": {
+            "value": null
+        },
+        "connections_hub_1_name": {
+            "value": null
+        },
+        "connections_hub_2_name": {
+            "value": null
+        },
+        "connections_hub_onprem_name": {
+            "value": null
+        },
+        "connections_onprem_hub_name": {
+            "value": null
+        },
+        "virtualMachines_qatar_1_name": {
+            "value": null
+        },
+        "virtualNetworks_qatar_1_name": {
+            "value": null
+        },
+        "virtualNetworks_qatar_2_name": {
+            "value": null
+        },
+        "virtualMachines_qatar_hub_name": {
+            "value": null
+        },
         "connections_remote_onprem_name": {
             "value": null
         },
-        "virtualMachines_qatar_remote_name": {
+        "virtualNetworks_qatar_hub_name": {
             "value": null
         },
-        "virtualNetworks_qatar_remote_name": {
+        "networkInterfaces_qatar_1771_name": {
             "value": null
         },
-        "networkInterfaces_qatar_remote453_name": {
+        "publicIPAddresses_qatar_1_ip_name": {
             "value": null
         },
-        "publicIPAddresses_qatar_remote_ip_name": {
+        "virtualNetworks_qatar_onprem_name": {
             "value": null
         },
-        "networkSecurityGroups_qatar_remote_nsg_name": {
+        "networkInterfaces_qatar_hub139_name": {
             "value": null
         },
-        "virtualNetworkGateways_qatar_remote_gw_name": {
+        "publicIPAddresses_qatar_hub_ip_name": {
             "value": null
         },
-        "publicIPAddresses_qatar_remote_gw_pubip_name": {
+        "networkSecurityGroups_qatar_1_nsg_name": {
             "value": null
         },
-        "schedules_shutdown_computevm_qatar_remote_name": {
+        "virtualNetworkGateways_qatar_1_gw_name": {
             "value": null
         },
-        "virtualNetworkGateways_qatar_onprem_gw_externalid": {
+        "virtualNetworkGateways_qatar_2_gw_name": {
+            "value": null
+        },
+        "publicIPAddresses_qatar_1_gw_pubip_name": {
+            "value": null
+        },
+        "publicIPAddresses_qatar_2_gw_pubip_name": {
+            "value": null
+        },
+        "networkSecurityGroups_qatar_hub_nsg_name": {
+            "value": null
+        },
+        "virtualNetworkGateways_qatar_hub_gw_name": {
+            "value": null
+        },
+        "publicIPAddresses_qatar_hub_gw_pubip_name": {
+            "value": null
+        },
+        "virtualNetworkGateways_qatar_onprem_gw_name": {
+            "value": null
+        },
+        "publicIPAddresses_qatar_onprem_gw_pubip_name": {
+            "value": null
+        },
+        "virtualNetworkGateways_qatar_remote_gw_externalid": {
             "value": null
         }
     }
