@@ -2,7 +2,7 @@ provider "azurerm" {
 version = "=2.0"
 features {}
 }
-Create a resource group
+#Create a resource group
 resource "azurerm_resource_group" "rg" {
   name     = "s2srg"
   location = "West Central US"
