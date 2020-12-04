@@ -116,7 +116,7 @@
         }
     },
     "variables": {
-        "virtualNetworkGateways_qatar_remote_gw_externalid" : "[concat('/subscriptions/',parameters('remote_subscription_id'),'/resourceGroups/qatar/providers/Microsoft.Network/virtualNetworkGateways/qatar-remote-gw')]"
+        "virtualNetworkGateways_qatar_remote_gw_externalid" : "[concat('/subscriptions/',parameters('remote_subscription_id'),'/resourceGroups/',resourceGroup().name,'/providers/Microsoft.Network/virtualNetworkGateways/qatar-remote-gw')]"
 
     },
     "resources": [

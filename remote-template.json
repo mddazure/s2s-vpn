@@ -44,8 +44,7 @@
         }
     },
     "variables": {
-        "virtualNetworkGateways_qatar_onprem_gw_externalid" : "[concat('/subscriptions/',parameters('home_subscription_id'),'/resourceGroups/qatar/providers/Microsoft.Network/virtualNetworkGateways/qatar-onprem-gw')]"
-
+        "virtualNetworkGateways_qatar_onprem_gw_externalid" : "[concat('/subscriptions/',parameters('home_subscription_id'),'/resourceGroups/',resourceGroup().name,'/providers/Microsoft.Network/virtualNetworkGateways/qatar-onprem-gw')]"
     },
     "resources": [
         {
