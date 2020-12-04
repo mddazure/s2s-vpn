@@ -1,5 +1,5 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "connections_1_hub_name": {
@@ -110,12 +110,15 @@
             "defaultValue": "qatar-onprem-gw-pubip",
             "type": "String"
         },
-        "virtualNetworkGateways_qatar_remote_gw_externalid": {
-            "defaultValue": "/subscriptions/60cac05f-df9e-4801-9b9d-7a9723314c9d/resourceGroups/qatar/providers/Microsoft.Network/virtualNetworkGateways/qatar-remote-gw",
+        "remote_subscription_id": {
+            "defaultValue": "60cac05f-df9e-4801-9b9d-7a9723314c9d",
             "type": "String"
         }
     },
-    "variables": {},
+    "variables": {
+        "virtualNetworkGateways_qatar_remote_gw_externalid" : "[concat('/subscriptions/',parameters('remote_subscription_id'),'/resourceGroups/qatar/providers/Microsoft.Network/virtualNetworkGateways/qatar-remote-gw')]"
+
+    },
     "resources": [
         {
             "type": "Microsoft.Network/networkSecurityGroups",
@@ -538,7 +541,7 @@
                     "id": "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_onprem_gw_name'))]"
                 },
                 "virtualNetworkGateway2": {
-                    "id": "[parameters('virtualNetworkGateways_qatar_remote_gw_externalid')]"
+                    "id": "[variables('virtualNetworkGateways_qatar_remote_gw_externalid')]"
                 },
                 "connectionType": "Vnet2Vnet",
                 "connectionProtocol": "IKEv2",
