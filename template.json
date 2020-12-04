@@ -50,8 +50,8 @@
             "defaultValue": "qatar-hub",
             "type": "String"
         },
-        "networkInterfaces_qatar_1771_name": {
-            "defaultValue": "qatar-1771",
+        "networkInterfaces_qatar_1_name": {
+            "defaultValue": "qatar-1-nic",
             "type": "String"
         },
         "publicIPAddresses_qatar_1_ip_name": {
@@ -62,8 +62,8 @@
             "defaultValue": "qatar-onprem",
             "type": "String"
         },
-        "networkInterfaces_qatar_hub139_name": {
-            "defaultValue": "qatar-hub139",
+        "networkInterfaces_qatar_hub_name": {
+            "defaultValue": "qatar-hub-nic",
             "type": "String"
         },
         "publicIPAddresses_qatar_hub_ip_name": {
@@ -420,7 +420,7 @@
             "name": "[parameters('virtualMachines_qatar_1_name')]",
             "location": "westeurope",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_qatar_1771_name'))]"
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_qatar_1_name'))]"
             ],
             "properties": {
                 "hardwareProfile": {
@@ -435,12 +435,11 @@
                     },
                     "osDisk": {
                         "osType": "Windows",
-                        "name": "[concat(parameters('virtualMachines_qatar_1_name'), '_OsDisk_1_06ef8f98e4ed4477b27b4a85d359f0be')]",
+                        "name": "[concat(parameters('virtualMachines_qatar_1_name'), 'OsDisk1')]",
                         "createOption": "FromImage",
                         "caching": "ReadWrite",
                         "managedDisk": {
-                            "storageAccountType": "Premium_LRS",
-                            "id": "[resourceId('Microsoft.Compute/disks', concat(parameters('virtualMachines_qatar_1_name'), '_OsDisk_1_06ef8f98e4ed4477b27b4a85d359f0be'))]"
+                            "storageAccountType": "Premium_LRS"
                         },
                         "diskSizeGB": 127
                     },
@@ -460,7 +459,7 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_qatar_1771_name'))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_qatar_1_name'))]"
                         }
                     ]
                 },
@@ -477,7 +476,7 @@
             "name": "[parameters('virtualMachines_qatar_hub_name')]",
             "location": "westeurope",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_qatar_hub139_name'))]"
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_qatar_hub_name'))]"
             ],
             "properties": {
                 "hardwareProfile": {
@@ -492,12 +491,11 @@
                     },
                     "osDisk": {
                         "osType": "Windows",
-                        "name": "[concat(parameters('virtualMachines_qatar_hub_name'), '_OsDisk_1_787404a2e17343b2a2fb5c302c34bfce')]",
+                        "name": "[concat(parameters('virtualMachines_qatar_hub_name'), 'Disk1')]",
                         "createOption": "FromImage",
                         "caching": "ReadWrite",
                         "managedDisk": {
-                            "storageAccountType": "Premium_LRS",
-                            "id": "[resourceId('Microsoft.Compute/disks', concat(parameters('virtualMachines_qatar_hub_name'), '_OsDisk_1_787404a2e17343b2a2fb5c302c34bfce'))]"
+                            "storageAccountType": "Premium_LRS"
                         },
                         "diskSizeGB": 127
                     },
@@ -517,7 +515,7 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_qatar_hub139_name'))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_qatar_hub_name'))]"
                         }
                     ]
                 },
@@ -1064,7 +1062,7 @@
         {
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2019-11-01",
-            "name": "[parameters('networkInterfaces_qatar_1771_name')]",
+            "name": "[parameters('networkInterfaces_qatar_1_name')]",
             "location": "westeurope",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_qatar_1_ip_name'))]",
@@ -1102,7 +1100,7 @@
         {
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2019-11-01",
-            "name": "[parameters('networkInterfaces_qatar_hub139_name')]",
+            "name": "[parameters('networkInterfaces_qatar_hub_name')]",
             "location": "westeurope",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_qatar_hub_ip_name'))]",

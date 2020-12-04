@@ -14,8 +14,8 @@
             "defaultValue": "qatar-remote",
             "type": "String"
         },
-        "networkInterfaces_qatar_remote453_name": {
-            "defaultValue": "qatar-remote453",
+        "networkInterfaces_remote_name": {
+            "defaultValue": "remote-nic",
             "type": "String"
         },
         "publicIPAddresses_qatar_remote_ip_name": {
@@ -148,7 +148,7 @@
             "name": "[parameters('virtualMachines_qatar_remote_name')]",
             "location": "westeurope",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_qatar_remote453_name'))]"
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_remote_name'))]"
             ],
             "properties": {
                 "hardwareProfile": {
@@ -163,12 +163,11 @@
                     },
                     "osDisk": {
                         "osType": "Windows",
-                        "name": "[concat(parameters('virtualMachines_qatar_remote_name'), '_disk1_3094ab99f4d24b24a387b25ccd79248d')]",
+                        "name": "[concat(parameters('virtualMachines_qatar_remote_name'), '_disk1')]",
                         "createOption": "FromImage",
                         "caching": "ReadWrite",
                         "managedDisk": {
-                            "storageAccountType": "Premium_LRS",
-                            "id": "[resourceId('Microsoft.Compute/disks', concat(parameters('virtualMachines_qatar_remote_name'), '_disk1_3094ab99f4d24b24a387b25ccd79248d'))]"
+                            "storageAccountType": "Premium_LRS"
                         },
                         "diskSizeGB": 127
                     },
@@ -188,7 +187,7 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_qatar_remote453_name'))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_remote_name'))]"
                         }
                     ]
                 }
@@ -337,7 +336,7 @@
         {
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2019-11-01",
-            "name": "[parameters('networkInterfaces_qatar_remote453_name')]",
+            "name": "[parameters('networkInterfaces_remote_name')]",
             "location": "westeurope",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_qatar_remote_ip_name'))]",
