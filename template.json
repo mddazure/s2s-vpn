@@ -2,6 +2,14 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "userName": {
+            "defaultValue":"marc",
+            "type":"String"
+        },
+        "userPassword": {
+            "defaultValue":"Nienke040598",
+            "type": "securestring"
+        },
         "connections_1_hub_name": {
             "defaultValue": "1-hub",
             "type": "String"
@@ -447,7 +455,8 @@
                 },
                 "osProfile": {
                     "computerName": "[parameters('virtualMachines_qatar_1_name')]",
-                    "adminUsername": "marc",
+                    "adminUsername": "[parameters('userName')]",
+                    "adminPassword":"[parameters('userPassword')]",
                     "windowsConfiguration": {
                         "provisionVMAgent": true,
                         "enableAutomaticUpdates": true
@@ -502,7 +511,8 @@
                 },
                 "osProfile": {
                     "computerName": "[parameters('virtualMachines_qatar_hub_name')]",
-                    "adminUsername": "marc",
+                    "adminUsername": "[parameters('userName')]",
+                    "adminPassword":"[parameters('userPassword')]",
                     "windowsConfiguration": {
                         "provisionVMAgent": true,
                         "enableAutomaticUpdates": true

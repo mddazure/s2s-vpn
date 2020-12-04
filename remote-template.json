@@ -2,6 +2,14 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+          "userName": {
+            "defaultValue":"marc",
+            "type":"String"
+        },
+        "userPassword": {
+            "defaultValue":"Nienke040598",
+            "type": "securestring"
+        },
         "connections_remote_onprem_name": {
             "defaultValue": "remote-onprem",
             "type": "String"
@@ -175,7 +183,8 @@
                 },
                 "osProfile": {
                     "computerName": "[parameters('virtualMachines_qatar_remote_name')]",
-                    "adminUsername": "marc",
+                     "adminUsername": "[parameters('userName')]",
+                    "adminPassword":"[parameters('userPassword')]",
                     "windowsConfiguration": {
                         "provisionVMAgent": true,
                         "enableAutomaticUpdates": true
