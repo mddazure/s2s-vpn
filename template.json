@@ -51,7 +51,7 @@
             "type": "String"
         },
         "connections_remote_onprem_name": {
-            "defaultValue": "remote-onprem",
+            "defaultValue": "onprem-remote",
             "type": "String"
         },
         "virtualNetworks_qatar_hub_name": {
@@ -120,6 +120,10 @@
         },
         "remote_subscription_id": {
             "defaultValue": "0245be41-c89b-4b46-a3cc-a705c90cd1e8",
+            "type": "String"
+        },
+        "conn_shared_key": {
+            "defaultValue": "s2svpn",
             "type": "String"
         }
     },
@@ -549,6 +553,7 @@
                 "virtualNetworkGateway2": {
                     "id": "[variables('virtualNetworkGateways_qatar_remote_gw_externalid')]"
                 },
+                "sharedKey": "[parameters('conn_shared_key')]",
                 "connectionType": "Vnet2Vnet",
                 "connectionProtocol": "IKEv2",
                 "routingWeight": 10,
@@ -731,6 +736,7 @@
                 "virtualNetworkGateway2": {
                     "id": "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_hub_gw_name'))]"
                 },
+                "sharedKey": "[parameters('conn_shared_key')]",
                 "connectionType": "Vnet2Vnet",
                 "connectionProtocol": "IKEv2",
                 "routingWeight": 0,
@@ -757,6 +763,7 @@
                 "virtualNetworkGateway2": {
                     "id": "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_hub_gw_name'))]"
                 },
+                "sharedKey": "[parameters('conn_shared_key')]",
                 "connectionType": "Vnet2Vnet",
                 "connectionProtocol": "IKEv2",
                 "routingWeight": 0,
@@ -783,6 +790,7 @@
                 "virtualNetworkGateway2": {
                     "id": "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_1_gw_name'))]"
                 },
+                "sharedKey": "[parameters('conn_shared_key')]",
                 "connectionType": "Vnet2Vnet",
                 "connectionProtocol": "IKEv2",
                 "routingWeight": 0,
@@ -809,6 +817,7 @@
                 "virtualNetworkGateway2": {
                     "id": "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_2_gw_name'))]"
                 },
+                "sharedKey": "[parameters('conn_shared_key')]",
                 "connectionType": "Vnet2Vnet",
                 "connectionProtocol": "IKEv2",
                 "routingWeight": 0,
@@ -835,6 +844,7 @@
                 "virtualNetworkGateway2": {
                     "id": "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_onprem_gw_name'))]"
                 },
+                "sharedKey": "[parameters('conn_shared_key')]",
                 "connectionType": "Vnet2Vnet",
                 "connectionProtocol": "IKEv2",
                 "routingWeight": 0,
@@ -861,6 +871,7 @@
                 "virtualNetworkGateway2": {
                     "id": "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_hub_gw_name'))]"
                 },
+                "sharedKey": "[parameters('conn_shared_key')]",
                 "connectionType": "Vnet2Vnet",
                 "connectionProtocol": "IKEv2",
                 "routingWeight": 0,

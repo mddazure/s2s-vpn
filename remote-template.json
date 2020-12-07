@@ -49,7 +49,13 @@
         "home_subscription_id": {
             "defaultValue": "0245be41-c89b-4b46-a3cc-a705c90cd1e8",
             "type": "String"
+        },
+        "conn_shared_key": {
+            "defaultValue": "s2svpn",
+            "type": "String"
         }
+
+
     },
     "variables": {
         "virtualNetworkGateways_qatar_onprem_gw_externalid" : "[concat('/subscriptions/',parameters('home_subscription_id'),'/resourceGroups/',resourceGroup().name,'/providers/Microsoft.Network/virtualNetworkGateways/qatar-onprem-gw')]"
@@ -240,10 +246,10 @@
                 "virtualNetworkGateway2": {
                     "id": "[variables('virtualNetworkGateways_qatar_onprem_gw_externalid')]"
                 },
+                "sharedKey": "[parameters('conn_shared_key')]",
                 "connectionType": "Vnet2Vnet",
                 "connectionProtocol": "IKEv2",
                 "routingWeight": 10,
-                "sharedKey": "q1234",
                 "enableBgp": true,
                 "usePolicyBasedTrafficSelectors": false,
                 "ipsecPolicies": [],
