@@ -1170,11 +1170,6 @@
                     "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_qatar_hub_nsg_name'))]"
                 }
             }
-        },
-        {"type": "Microsoft.Compute/virtualMachines/extensions",
-        
-
-
         }
     ]
 }
