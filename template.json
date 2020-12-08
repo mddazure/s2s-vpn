@@ -480,25 +480,29 @@
                 "billingProfile": {
                     "maxPrice": -1
                 }
+            },
+            "resources":[
+                {
+                "type": "Microsoft.Compute/virtualMachines/extensions",
+                "apiVersion": "2019-07-01",
+                "name": "iis",
+                "dependsOn":["[concat('Microsoft.Compute/virtualMachines/',parameters('virtualMachines_qatar_1_name'))]"],
+                "location": "westeurope",
+                "properties":{
+                    "publisher": "Microsoft.Compute",
+                    "type": "CustomScriptExtension",
+                    "typeHandlerVersion": "1.9",
+                    "autoUpgradeMinorVersion":true,
+                    "protectedSettings":{},
+                    "settings": {
+                        "commandToExecute":"powershell -ExecutionPolicy Unrestricted Add-WindowsFeature Web-Server; powershell -ExecutionPolicy Unrestricted Add-Content -Path \"C:\\inetpub\\wwwroot\\Default.htm\" -Value $($env:computername)"
+                    }
+                }   
             }
+            ]
         },
-        {
-            "type": "Microsoft.Compute/virtualMachines/extensions",
-            "apiVersion": "2019-07-01",
-            "name": "iis",
-            "dependsOn":["[concat('Microsoft.Compute/virtualMachines/',parameters('virtualMachines_qatar_1_name'))]", "[concat('Microsoft.Compute/virtualMachines/',parameters('virtualMachines_qatar_hub_name'))]"],
-            "location": "westeurope",
-            "properties":{
-                "publisher": "Microsoft.Compute",
-                "type": "CustomScriptExtension",
-                "typeHandlerVersion": "1.9",
-                 "autoUpgradeMinorVersion":true,
-                 "protectedSettings":{},
-                "settings": {
-                    "commandToExecute":"powershell -ExecutionPolicy Unrestricted Add-WindowsFeature Web-Server; powershell -ExecutionPolicy Unrestricted Add-Content -Path \"C:\\inetpub\\wwwroot\\Default.htm\" -Value $($env:computername)"
-                }
-            }
-        },
+
+        
         {
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2019-07-01",
@@ -553,7 +557,26 @@
                 "billingProfile": {
                     "maxPrice": -1
                 }
+            },
+            "resources":[
+                {
+                "type": "Microsoft.Compute/virtualMachines/extensions",
+                "apiVersion": "2019-07-01",
+                "name": "iis",
+                "dependsOn":["[concat('Microsoft.Compute/virtualMachines/',parameters('virtualMachines_qatar_1_name'))]"],
+                "location": "westeurope",
+                "properties":{
+                    "publisher": "Microsoft.Compute",
+                    "type": "CustomScriptExtension",
+                    "typeHandlerVersion": "1.9",
+                    "autoUpgradeMinorVersion":true,
+                    "protectedSettings":{},
+                    "settings": {
+                        "commandToExecute":"powershell -ExecutionPolicy Unrestricted Add-WindowsFeature Web-Server; powershell -ExecutionPolicy Unrestricted Add-Content -Path \"C:\\inetpub\\wwwroot\\Default.htm\" -Value $($env:computername)"
+                    }
+                }   
             }
+            ]
         },
         {
             "type": "Microsoft.Network/connections",
