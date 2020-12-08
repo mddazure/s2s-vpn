@@ -55,7 +55,6 @@
             "type": "String"
         }
 
-
     },
     "variables": {
         "virtualNetworkGateways_qatar_onprem_gw_externalid" : "[concat('/subscriptions/',parameters('home_subscription_id'),'/resourceGroups/',resourceGroup().name,'/providers/Microsoft.Network/virtualNetworkGateways/qatar-onprem-gw')]"
@@ -204,6 +203,23 @@
                             "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_remote_name'))]"
                         }
                     ]
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "apiVersion": "2019-07-01",
+            "name": "iis",
+            "dependsOn":["[concat('Microsoft.Compute/virtualMachines/',parameters('virtualMachines_qatar_remote_name'))]"],
+            "location": "westeurope",
+            "properties":{
+                "publisher": "Microsoft.Compute",
+                "type": "CustomScriptExtension",
+                "typeHandlerVersion": "1.9",
+                 "autoUpgradeMinorVersion":true,
+                 "protectedSettings":{},
+                "settings": {
+                    "commandToExecute":"powershell -ExecutionPolicy Unrestricted Add-WindowsFeature Web-Server; powershell -ExecutionPolicy Unrestricted Add-Content -Path \"C:\\inetpub\\wwwroot\\Default.htm\" -Value $($env:computername)"
                 }
             }
         },
