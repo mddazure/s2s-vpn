@@ -483,7 +483,7 @@
             },
             "resources":[
                 {
-                "type": "Microsoft.Compute/virtualMachines/extensions",
+                "type": "extensions",
                 "apiVersion": "2019-07-01",
                 "name": "iis",
                 "dependsOn":["[concat('Microsoft.Compute/virtualMachines/',parameters('virtualMachines_qatar_1_name'))]"],
@@ -560,7 +560,7 @@
             },
             "resources":[
                 {
-                "type": "Microsoft.Compute/virtualMachines/extensions",
+                "type": "extensions",
                 "apiVersion": "2019-07-01",
                 "name": "iis",
                 "dependsOn":["[concat('Microsoft.Compute/virtualMachines/',parameters('virtualMachines_qatar_1_name'))]"],
