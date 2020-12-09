@@ -38,6 +38,10 @@
             "defaultValue": "qatar-1",
             "type": "String"
         },
+        "virtualMachines_qatar_2_name": {
+        "defaultValue": "qatar-2",
+        "type": "String"
+        },
         "virtualNetworks_qatar_1_name": {
             "defaultValue": "qatar-1",
             "type": "String"
@@ -62,8 +66,16 @@
             "defaultValue": "qatar-1-nic",
             "type": "String"
         },
+        "networkInterfaces_qatar_2_name": {
+            "defaultValue": "qatar-2-nic",
+            "type": "String"
+        },
         "publicIPAddresses_qatar_1_ip_name": {
             "defaultValue": "qatar-1-ip",
+            "type": "String"
+        },
+        "publicIPAddresses_qatar_2_ip_name": {
+            "defaultValue": "qatar-2-ip",
             "type": "String"
         },
         "virtualNetworks_qatar_onprem_name": {
@@ -212,6 +224,21 @@
             },
             "properties": {
                 "ipAddress": "52.236.164.147",
+                "publicIPAddressVersion": "IPv4",
+                "publicIPAllocationMethod": "Dynamic",
+                "idleTimeoutInMinutes": 4,
+                "ipTags": []
+            }
+        },
+                {
+            "type": "Microsoft.Network/publicIPAddresses",
+            "apiVersion": "2019-11-01",
+            "name": "[parameters('publicIPAddresses_qatar_2_ip_name')]",
+            "location": "westeurope",
+            "sku": {
+                "name": "Basic"
+            },
+            "properties": {
                 "publicIPAddressVersion": "IPv4",
                 "publicIPAllocationMethod": "Dynamic",
                 "idleTimeoutInMinutes": 4,
@@ -501,7 +528,81 @@
             }
             ]
         },
-
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2019-07-01",
+            "name": "[parameters('virtualMachines_qatar_2_name')]",
+            "location": "westeurope",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_qatar_2_name'))]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_DS1_v2"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2016-Datacenter",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "osType": "Windows",
+                        "name": "[concat(parameters('virtualMachines_qatar_2_name'), 'OsDisk1')]",
+                        "createOption": "FromImage",
+                        "caching": "ReadWrite",
+                        "managedDisk": {
+                            "storageAccountType": "Premium_LRS"
+                        },
+                        "diskSizeGB": 127
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_qatar_2_name')]",
+                    "adminUsername": "[parameters('userName')]",
+                    "adminPassword":"[parameters('userPassword')]",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_qatar_2_name'))]"
+                        }
+                    ]
+                },
+                "priority": "Spot",
+                "evictionPolicy": "Deallocate",
+                "billingProfile": {
+                    "maxPrice": -1
+                }
+            },
+            "resources":[
+                {
+                "type": "extensions",
+                "apiVersion": "2019-07-01",
+                "name": "iis",
+                "dependsOn":["[concat('Microsoft.Compute/virtualMachines/',parameters('virtualMachines_qatar_2_name'))]"],
+                "location": "westeurope",
+                "properties":{
+                    "publisher": "Microsoft.Compute",
+                    "type": "CustomScriptExtension",
+                    "typeHandlerVersion": "1.9",
+                    "autoUpgradeMinorVersion":true,
+                    "protectedSettings":{},
+                    "settings": {
+                        "commandToExecute":"powershell -ExecutionPolicy Unrestricted Add-WindowsFeature Web-Server; powershell -ExecutionPolicy Unrestricted Add-Content -Path \"C:\\inetpub\\wwwroot\\Default.htm\" -Value $($env:computername)"
+                    }
+                }   
+            }
+            ]
+        },
         
         {
             "type": "Microsoft.Compute/virtualMachines",
@@ -1140,6 +1241,44 @@
                             },
                             "subnet": {
                                 "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_qatar_1_name'), 'subnet1')]"
+                            },
+                            "primary": true,
+                            "privateIPAddressVersion": "IPv4"
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableAcceleratedNetworking": false,
+                "enableIPForwarding": false,
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_qatar_1_nsg_name'))]"
+                }
+            }
+        },
+                {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2019-11-01",
+            "name": "[parameters('networkInterfaces_qatar_2_name')]",
+            "location": "westeurope",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_qatar_2_ip_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_qatar_2_name'), 'subnet1')]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_qatar_1_nsg_name'))]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAddress": "192.168.1.4",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_qatar_2_ip_name'))]"
+                            },
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_qatar_2_name'), 'subnet1')]"
                             },
                             "primary": true,
                             "privateIPAddressVersion": "IPv4"
