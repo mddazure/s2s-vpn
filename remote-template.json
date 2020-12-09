@@ -96,7 +96,6 @@
                 "name": "Basic"
             },
             "properties": {
-                "ipAddress": "52.174.66.109",
                 "publicIPAddressVersion": "IPv4",
                 "publicIPAllocationMethod": "Dynamic",
                 "idleTimeoutInMinutes": 4,
@@ -112,7 +111,6 @@
                 "name": "Basic"
             },
             "properties": {
-                "ipAddress": "13.80.65.242",
                 "publicIPAddressVersion": "IPv4",
                 "publicIPAllocationMethod": "Dynamic",
                 "idleTimeoutInMinutes": 4,
@@ -234,14 +232,14 @@
                 "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_qatar_remote_name'))]"
             ],
             "properties": {
-                "status": "Disabled",
+                "status": "Enabled",
                 "taskType": "ComputeVmShutdownTask",
                 "dailyRecurrence": {
                     "time": "1900"
                 },
                 "timeZoneId": "UTC",
                 "notificationSettings": {
-                    "status": "Enabled",
+                    "status": "Disabled",
                     "timeInMinutes": 30,
                     "emailRecipient": "mddazure@gmail.com",
                     "notificationLocale": "en"

@@ -137,6 +137,22 @@
         "conn_shared_key": {
             "defaultValue": "s2svpn",
             "type": "String"
+        },
+         "schedules_shutdown_computevm_qatar_1_name": {
+            "defaultValue": "shutdown-computevm-qatar-1",
+            "type": "String"
+        },
+         "schedules_shutdown_computevm_qatar_2_name": {
+            "defaultValue": "shutdown-computevm-qatar-2",
+            "type": "String"
+        },
+        "schedules_shutdown_computevm_qatar_hub_name": {
+            "defaultValue": "shutdown-computevm-qatar-hub",
+            "type": "String"
+        },
+        "schedules_shutdown_computevm_qatar_onprem_name": {
+            "defaultValue": "shutdown-computevm-qatar-onprem",
+            "type": "String"
         }
     },
     "variables": {
@@ -1245,6 +1261,77 @@
                 "networkSecurityGroup": {
                     "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_qatar_hub_nsg_name'))]"
                 }
+            }
+        },
+                {
+            "type": "microsoft.devtestlab/schedules",
+            "apiVersion": "2018-09-15",
+            "name": "[parameters('schedules_shutdown_computevm_qatar_1_name')]",
+            "location": "westeurope",
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_qatar_1_name'))]"
+            ],
+            "properties": {
+                "status": "Enabled",
+                "taskType": "ComputeVmShutdownTask",
+                "dailyRecurrence": {
+                    "time": "1900"
+                },
+                "timeZoneId": "UTC",
+                "notificationSettings": {
+                    "status": "Disabled",
+                    "timeInMinutes": 30,
+                    "emailRecipient": "mddazure@gmail.com",
+                    "notificationLocale": "en"
+                },
+                "targetResourceId": "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_qatar_1_name'))]"
+            }
+        },
+                        {
+            "type": "microsoft.devtestlab/schedules",
+            "apiVersion": "2018-09-15",
+            "name": "[parameters('schedules_shutdown_computevm_qatar_2_name')]",
+            "location": "westeurope",
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_qatar_2_name'))]"
+            ],
+            "properties": {
+                "status": "Enabled",
+                "taskType": "ComputeVmShutdownTask",
+                "dailyRecurrence": {
+                    "time": "1900"
+                },
+                "timeZoneId": "UTC",
+                "notificationSettings": {
+                    "status": "Disabled",
+                    "timeInMinutes": 30,
+                    "emailRecipient": "mddazure@gmail.com",
+                    "notificationLocale": "en"
+                },
+                "targetResourceId": "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_qatar_2_name'))]"
+            }
+        },                {
+            "type": "microsoft.devtestlab/schedules",
+            "apiVersion": "2018-09-15",
+            "name": "[parameters('schedules_shutdown_computevm_qatar_hub_name')]",
+            "location": "westeurope",
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_qatar_hub_name'))]"
+            ],
+            "properties": {
+                "status": "Enabled",
+                "taskType": "ComputeVmShutdownTask",
+                "dailyRecurrence": {
+                    "time": "1900"
+                },
+                "timeZoneId": "UTC",
+                "notificationSettings": {
+                    "status": "Disabled",
+                    "timeInMinutes": 30,
+                    "emailRecipient": "mddazure@gmail.com",
+                    "notificationLocale": "en"
+                },
+                "targetResourceId": "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_qatar_hub_name'))]"
             }
         }
     ]
