@@ -358,7 +358,7 @@
                 },
                 "subnets": [
                     {
-                        "name": "subnet2",
+                        "name": "subnet1",
                         "properties": {
                             "addressPrefix": "192.168.2.0/25",
                             "delegations": [],
