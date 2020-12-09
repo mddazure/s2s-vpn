@@ -207,7 +207,6 @@
                 "name": "Basic"
             },
             "properties": {
-                "ipAddress": "52.166.166.127",
                 "publicIPAddressVersion": "IPv4",
                 "publicIPAllocationMethod": "Dynamic",
                 "idleTimeoutInMinutes": 4,
@@ -223,7 +222,6 @@
                 "name": "Basic"
             },
             "properties": {
-                "ipAddress": "52.236.164.147",
                 "publicIPAddressVersion": "IPv4",
                 "publicIPAllocationMethod": "Dynamic",
                 "idleTimeoutInMinutes": 4,
@@ -254,7 +252,6 @@
                 "name": "Basic"
             },
             "properties": {
-                "ipAddress": "52.174.5.109",
                 "publicIPAddressVersion": "IPv4",
                 "publicIPAllocationMethod": "Dynamic",
                 "idleTimeoutInMinutes": 4,
@@ -270,7 +267,6 @@
                 "name": "Basic"
             },
             "properties": {
-                "ipAddress": "52.174.3.150",
                 "publicIPAddressVersion": "IPv4",
                 "publicIPAllocationMethod": "Dynamic",
                 "idleTimeoutInMinutes": 4,
@@ -286,7 +282,6 @@
                 "name": "Basic"
             },
             "properties": {
-                "ipAddress": "13.95.31.48",
                 "publicIPAddressVersion": "IPv4",
                 "publicIPAllocationMethod": "Dynamic",
                 "idleTimeoutInMinutes": 4,
@@ -302,7 +297,6 @@
                 "name": "Basic"
             },
             "properties": {
-                "ipAddress": "52.157.109.185",
                 "publicIPAddressVersion": "IPv4",
                 "publicIPAllocationMethod": "Dynamic",
                 "idleTimeoutInMinutes": 4,
@@ -320,26 +314,6 @@
                         "192.168.1.0/24"
                     ]
                 },
-                "subnets": [
-                    {
-                        "name": "subnet1",
-                        "properties": {
-                            "addressPrefix": "192.168.1.0/25",
-                            "delegations": [],
-                            "privateEndpointNetworkPolicies": "Enabled",
-                            "privateLinkServiceNetworkPolicies": "Enabled"
-                        }
-                    },
-                    {
-                        "name": "GatewaySubnet",
-                        "properties": {
-                            "addressPrefix": "192.168.1.128/28",
-                            "delegations": [],
-                            "privateEndpointNetworkPolicies": "Enabled",
-                            "privateLinkServiceNetworkPolicies": "Enabled"
-                        }
-                    }
-                ],
                 "virtualNetworkPeerings": [],
                 "enableDdosProtection": false,
                 "enableVmProtection": false
