@@ -1,5 +1,5 @@
-# S2S VPN
-S2S VPN network with BGP, cross subscr &amp; tenant (remote)
+# S2S VPN 
+S2S VPN network with BGP, cross-subscription and cross-tenant (remote)
 
 Deploy to Subscription 1
 
