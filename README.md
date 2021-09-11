@@ -1,4 +1,4 @@
-# 101-s2s-vpn
+# S2S VPN
 S2S VPN network with BGP, cross subscr &amp; tenant (remote)
 
 Deploy to Subscription 1
