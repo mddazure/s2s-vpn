@@ -5,6 +5,10 @@ Deploy to Subscription 1
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmddazure%2F101-s2s-vpn%2Fmaster%2Ftemplate.json)
 
+Deploy to Subscription 1, spoke VNETs connected via VNET peers in stead of tunnels
+
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmddazure%2F101-s2s-vpn%2Fmaster%2Ftemplate-peers.json)
+
 Deploy to Subscription 2
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmddazure%2F101-s2s-vpn%2Fmaster%2Fremote-template.json)

@@ -10,19 +10,19 @@
             "defaultValue":"Nienke040598",
             "type": "securestring"
         },
-        "connections_1_hub_name": {
+        "peers_1_hub_name": {
             "defaultValue": "1-hub",
             "type": "String"
         },
-        "connections_2_hub_name": {
+        "peers_2_hub_name": {
             "defaultValue": "2-hub",
             "type": "String"
         },
-        "connections_hub_1_name": {
+        "peers_hub_1_name": {
             "defaultValue": "hub-1",
             "type": "String"
         },
-        "connections_hub_2_name": {
+        "peers_hub_2_name": {
             "defaultValue": "hub-2",
             "type": "String"
         },
@@ -92,14 +92,6 @@
         },
         "networkSecurityGroups_qatar_1_nsg_name": {
             "defaultValue": "qatar-1-nsg",
-            "type": "String"
-        },
-        "virtualNetworkGateways_qatar_1_gw_name": {
-            "defaultValue": "qatar-1-gw",
-            "type": "String"
-        },
-        "virtualNetworkGateways_qatar_2_gw_name": {
-            "defaultValue": "qatar-2-gw",
             "type": "String"
         },
         "publicIPAddresses_qatar_1_gw_pubip_name": {
@@ -783,112 +775,79 @@
             }
         },
         {
-            "type": "Microsoft.Network/connections",
+            "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
             "apiVersion": "2019-11-01",
-            "name": "[parameters('connections_1_hub_name')]",
-            "location": "westeurope",
+            "name": "[concat(parameters('virtualNetworks_qatar_2_name'),'/',parameters('peers_2_hub_name'))]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_1_gw_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_2_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_hub_name'))]",
                 "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_hub_gw_name'))]"
             ],
             "properties": {
-                "virtualNetworkGateway1": {
-                    "id": "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_1_gw_name'))]"
-                },
-                "virtualNetworkGateway2": {
-                    "id": "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_hub_gw_name'))]"
-                },
-                "sharedKey": "[parameters('conn_shared_key')]",
-                "connectionType": "Vnet2Vnet",
-                "connectionProtocol": "IKEv2",
-                "routingWeight": 0,
-                "enableBgp": true,
-                "usePolicyBasedTrafficSelectors": false,
-                "ipsecPolicies": [],
-                "trafficSelectorPolicies": [],
-                "expressRouteGatewayBypass": false
-            }
+                    "allowForwardedTraffic": true,
+                    "allowGatewayTransit": true,
+                    "allowVirtualNetworkAccess": true,
+                    "useRemoteGateways": true,
+                    "remoteVirtualNetwork": {
+                        "id": "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_hub_name'))]"
+                    }
+            }            
         },
         {
-            "type": "Microsoft.Network/connections",
+            "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
             "apiVersion": "2019-11-01",
-            "name": "[parameters('connections_2_hub_name')]",
-            "location": "westeurope",
+            "name": "[concat(parameters('virtualNetworks_qatar_hub_name'),'/',parameters('peers_hub_2_name'))]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_2_gw_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_2_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_hub_name'))]",
                 "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_hub_gw_name'))]"
             ],
             "properties": {
-                "virtualNetworkGateway1": {
-                    "id": "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_2_gw_name'))]"
-                },
-                "virtualNetworkGateway2": {
-                    "id": "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_hub_gw_name'))]"
-                },
-                "sharedKey": "[parameters('conn_shared_key')]",
-                "connectionType": "Vnet2Vnet",
-                "connectionProtocol": "IKEv2",
-                "routingWeight": 0,
-                "enableBgp": true,
-                "usePolicyBasedTrafficSelectors": false,
-                "ipsecPolicies": [],
-                "trafficSelectorPolicies": [],
-                "expressRouteGatewayBypass": false
-            }
+                    "allowForwardedTraffic": true,
+                    "allowGatewayTransit": true,
+                    "allowVirtualNetworkAccess": true,
+                    "useRemoteGateways": true,
+                    "remoteVirtualNetwork": {
+                    "id":"[resourceId('Microsoft.Network/virtualNetworks',parameters('virtualNetworks_qatar_2_name'))]"
+                    }
+            }            
         },
         {
-            "type": "Microsoft.Network/connections",
+            "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
             "apiVersion": "2019-11-01",
-            "name": "[parameters('connections_hub_1_name')]",
-            "location": "westeurope",
+            "name": "[concat(parameters('virtualNetworks_qatar_1_name'),'/',parameters('peers_1_hub_name'))]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_hub_gw_name'))]",
-                "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_1_gw_name'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_1_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_hub_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_hub_gw_name'))]"
             ],
             "properties": {
-                "virtualNetworkGateway1": {
-                    "id": "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_hub_gw_name'))]"
-                },
-                "virtualNetworkGateway2": {
-                    "id": "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_1_gw_name'))]"
-                },
-                "sharedKey": "[parameters('conn_shared_key')]",
-                "connectionType": "Vnet2Vnet",
-                "connectionProtocol": "IKEv2",
-                "routingWeight": 0,
-                "enableBgp": true,
-                "usePolicyBasedTrafficSelectors": false,
-                "ipsecPolicies": [],
-                "trafficSelectorPolicies": [],
-                "expressRouteGatewayBypass": false
-            }
+                    "allowForwardedTraffic": true,
+                    "allowGatewayTransit": true,
+                    "allowVirtualNetworkAccess": true,
+                    "useRemoteGateways": true,
+                    "remoteVirtualNetwork":{
+                    "id": "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_hub_name'))]"
+                    }
+            }            
         },
         {
-            "type": "Microsoft.Network/connections",
+            "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
             "apiVersion": "2019-11-01",
-            "name": "[parameters('connections_hub_2_name')]",
-            "location": "westeurope",
+            "name": "[concat(parameters('virtualNetworks_qatar_hub_name'),'/',parameters('peers_hub_1_name'))]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_hub_gw_name'))]",
-                "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_2_gw_name'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_1_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_hub_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_hub_gw_name'))]"
             ],
             "properties": {
-                "virtualNetworkGateway1": {
-                    "id": "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_hub_gw_name'))]"
-                },
-                "virtualNetworkGateway2": {
-                    "id": "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_2_gw_name'))]"
-                },
-                "sharedKey": "[parameters('conn_shared_key')]",
-                "connectionType": "Vnet2Vnet",
-                "connectionProtocol": "IKEv2",
-                "routingWeight": 0,
-                "enableBgp": true,
-                "usePolicyBasedTrafficSelectors": false,
-                "ipsecPolicies": [],
-                "trafficSelectorPolicies": [],
-                "expressRouteGatewayBypass": false
-            }
+                    "allowForwardedTraffic": true,
+                    "allowGatewayTransit": true,
+                    "allowVirtualNetworkAccess": true,
+                    "useRemoteGateways": true,
+                    "remoteVirtualNetwork": {
+                        "id":"[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_1_name'))]"
+            }       }
         },
         {
             "type": "Microsoft.Network/connections",
@@ -944,104 +903,7 @@
                 "expressRouteGatewayBypass": false
             }
         },
-        {
-            "type": "Microsoft.Network/virtualNetworkGateways",
-            "apiVersion": "2019-11-01",
-            "name": "[parameters('virtualNetworkGateways_qatar_1_gw_name')]",
-            "location": "westeurope",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_qatar_1_gw_pubip_name'))]",
-                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_qatar_1_name'), 'GatewaySubnet')]"
-            ],
-            "properties": {
-                "ipConfigurations": [
-                    {
-                        "name": "default",
-                        "properties": {
-                            "privateIPAllocationMethod": "Dynamic",
-                            "publicIPAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_qatar_1_gw_pubip_name'))]"
-                            },
-                            "subnet": {
-                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_qatar_1_name'), 'GatewaySubnet')]"
-                            }
-                        }
-                    }
-                ],
-                "sku": {
-                    "name": "VpnGw1",
-                    "tier": "VpnGw1"
-                },
-                "gatewayType": "Vpn",
-                "vpnType": "RouteBased",
-                "enableBgp": true,
-                "activeActive": false,
-                "vpnClientConfiguration": {
-                    "vpnClientProtocols": [
-                        "OpenVPN",
-                        "IkeV2"
-                    ],
-                    "vpnClientRootCertificates": [],
-                    "vpnClientRevokedCertificates": [],
-                    "vpnClientIpsecPolicies": []
-                },
-                "bgpSettings": {
-                    "asn": 65001,
-                    "bgpPeeringAddress": "192.168.1.142",
-                    "peerWeight": 0
-                },
-                "vpnGatewayGeneration": "Generation1"
-            }
-        },
-        {
-            "type": "Microsoft.Network/virtualNetworkGateways",
-            "apiVersion": "2019-11-01",
-            "name": "[parameters('virtualNetworkGateways_qatar_2_gw_name')]",
-            "location": "westeurope",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_qatar_2_gw_pubip_name'))]",
-                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_qatar_2_name'), 'GatewaySubnet')]"
-            ],
-            "properties": {
-                "ipConfigurations": [
-                    {
-                        "name": "default",
-                        "properties": {
-                            "privateIPAllocationMethod": "Dynamic",
-                            "publicIPAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_qatar_2_gw_pubip_name'))]"
-                            },
-                            "subnet": {
-                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_qatar_2_name'), 'GatewaySubnet')]"
-                            }
-                        }
-                    }
-                ],
-                "sku": {
-                    "name": "VpnGw1",
-                    "tier": "VpnGw1"
-                },
-                "gatewayType": "Vpn",
-                "vpnType": "RouteBased",
-                "enableBgp": true,
-                "activeActive": false,
-                "vpnClientConfiguration": {
-                    "vpnClientProtocols": [
-                        "OpenVPN",
-                        "IkeV2"
-                    ],
-                    "vpnClientRootCertificates": [],
-                    "vpnClientRevokedCertificates": [],
-                    "vpnClientIpsecPolicies": []
-                },
-                "bgpSettings": {
-                    "asn": 65002,
-                    "bgpPeeringAddress": "192.168.2.142",
-                    "peerWeight": 0
-                },
-                "vpnGatewayGeneration": "Generation1"
-            }
-        },
+
         {
             "type": "Microsoft.Network/virtualNetworkGateways",
             "apiVersion": "2019-11-01",
