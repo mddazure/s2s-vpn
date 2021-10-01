@@ -10,6 +10,10 @@
             "defaultValue":"Nienke040598",
             "type": "securestring"
         },
+        "location":{
+            "defaultValue": "westeurope",
+            "type": "string"
+        },
         "peers_1_hub_name": {
             "defaultValue": "1-hub",
             "type": "String"
@@ -156,7 +160,7 @@
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2019-11-01",
             "name": "[parameters('networkSecurityGroups_qatar_1_nsg_name')]",
-            "location": "westeurope",
+            "location": "[parameters('location')]",
             "properties": {
                 "securityRules": [
                     {
@@ -183,7 +187,7 @@
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2019-11-01",
             "name": "[parameters('networkSecurityGroups_qatar_hub_nsg_name')]",
-            "location": "westeurope",
+            "location": "[parameters('location')]",
             "properties": {
                 "securityRules": [
                     {
@@ -210,7 +214,7 @@
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2019-11-01",
             "name": "[parameters('publicIPAddresses_qatar_1_gw_pubip_name')]",
-            "location": "westeurope",
+            "location": "[parameters('location')]",
             "sku": {
                 "name": "Basic"
             },
@@ -225,7 +229,7 @@
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2019-11-01",
             "name": "[parameters('publicIPAddresses_qatar_1_ip_name')]",
-            "location": "westeurope",
+            "location": "[parameters('location')]",
             "sku": {
                 "name": "Basic"
             },
@@ -240,7 +244,7 @@
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2019-11-01",
             "name": "[parameters('publicIPAddresses_qatar_2_ip_name')]",
-            "location": "westeurope",
+            "location":"[parameters('location')]",
             "sku": {
                 "name": "Basic"
             },
@@ -255,7 +259,7 @@
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2019-11-01",
             "name": "[parameters('publicIPAddresses_qatar_2_gw_pubip_name')]",
-            "location": "westeurope",
+            "location": "[parameters('location')]",
             "sku": {
                 "name": "Basic"
             },
@@ -270,7 +274,7 @@
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2019-11-01",
             "name": "[parameters('publicIPAddresses_qatar_hub_gw_pubip_name')]",
-            "location": "westeurope",
+            "location": "[parameters('location')]",
             "sku": {
                 "name": "Basic"
             },
@@ -285,7 +289,7 @@
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2019-11-01",
             "name": "[parameters('publicIPAddresses_qatar_hub_ip_name')]",
-            "location": "westeurope",
+            "location": "[parameters('location')]",
             "sku": {
                 "name": "Basic"
             },
@@ -300,7 +304,7 @@
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2019-11-01",
             "name": "[parameters('publicIPAddresses_qatar_onprem_gw_pubip_name')]",
-            "location": "westeurope",
+            "location": "[parameters('location')]",
             "sku": {
                 "name": "Basic"
             },
@@ -315,7 +319,7 @@
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2019-11-01",
             "name": "[parameters('virtualNetworks_qatar_1_name')]",
-            "location": "westeurope",
+            "location": "[parameters('location')]",
             "properties": {
                 "addressSpace": {
                     "addressPrefixes": [
@@ -331,7 +335,7 @@
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2019-11-01",
             "name": "[parameters('virtualNetworks_qatar_2_name')]",
-            "location": "westeurope",
+            "location": "[parameters('location')]",
             "properties": {
                 "addressSpace": {
                     "addressPrefixes": [
@@ -347,7 +351,7 @@
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2019-11-01",
             "name": "[parameters('virtualNetworks_qatar_hub_name')]",
-            "location": "westeurope",
+            "location": "[parameters('location')]",
             "properties": {
                 "addressSpace": {
                     "addressPrefixes": [
@@ -363,7 +367,7 @@
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2019-11-01",
             "name": "[parameters('virtualNetworks_qatar_onprem_name')]",
-            "location": "westeurope",
+            "location": "[parameters('location')]",
             "properties": {
                 "addressSpace": {
                     "addressPrefixes": [
@@ -379,7 +383,7 @@
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2019-07-01",
             "name": "[parameters('virtualMachines_qatar_1_name')]",
-            "location": "westeurope",
+            "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_qatar_1_name'))]"
             ],
@@ -433,7 +437,7 @@
                 "apiVersion": "2019-07-01",
                 "name": "iis",
                 "dependsOn":["[concat('Microsoft.Compute/virtualMachines/',parameters('virtualMachines_qatar_1_name'))]"],
-                "location": "westeurope",
+                "location": "[parameters('location')]",
                 "properties":{
                     "publisher": "Microsoft.Compute",
                     "type": "CustomScriptExtension",
@@ -451,7 +455,7 @@
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2019-07-01",
             "name": "[parameters('virtualMachines_qatar_2_name')]",
-            "location": "westeurope",
+            "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_qatar_2_name'))]"
             ],
@@ -505,7 +509,7 @@
                 "apiVersion": "2019-07-01",
                 "name": "iis",
                 "dependsOn":["[concat('Microsoft.Compute/virtualMachines/',parameters('virtualMachines_qatar_2_name'))]"],
-                "location": "westeurope",
+                "location": "[parameters('location')]",
                 "properties":{
                     "publisher": "Microsoft.Compute",
                     "type": "CustomScriptExtension",
@@ -524,7 +528,7 @@
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2019-07-01",
             "name": "[parameters('virtualMachines_qatar_hub_name')]",
-            "location": "westeurope",
+            "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_qatar_hub_name'))]"
             ],
@@ -578,7 +582,7 @@
                 "apiVersion": "2019-07-01",
                 "name": "iis",
                 "dependsOn":["[concat('Microsoft.Compute/virtualMachines/',parameters('virtualMachines_qatar_hub_name'))]"],
-                "location": "westeurope",
+                "location": "[parameters('location')]",
                 "properties":{
                     "publisher": "Microsoft.Compute",
                     "type": "CustomScriptExtension",
@@ -596,7 +600,7 @@
             "type": "Microsoft.Network/connections",
             "apiVersion": "2019-11-01",
             "name": "[parameters('connections_remote_onprem_name')]",
-            "location": "westeurope",
+            "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_onprem_gw_name'))]"
             ],
@@ -723,13 +727,17 @@
             "apiVersion": "2019-11-01",
             "name": "[concat(parameters('virtualNetworks_qatar_1_name'), '/subnet1')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_1_name'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_1_name'))]",
+                "[resourceId('Microsoft.Network/routeTables','spoke-rt')]"
             ],
             "properties": {
                 "addressPrefix": "192.168.1.0/25",
                 "delegations": [],
                 "privateEndpointNetworkPolicies": "Enabled",
-                "privateLinkServiceNetworkPolicies": "Enabled"
+                "privateLinkServiceNetworkPolicies": "Enabled",
+                "routeTable": {
+                    "id": "[resourceId('Microsoft.Network/routeTables','spoke-rt')]"
+                }
             }
         },
         {
@@ -765,13 +773,17 @@
             "apiVersion": "2019-11-01",
             "name": "[concat(parameters('virtualNetworks_qatar_2_name'), '/subnet1')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_2_name'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_2_name'))]",
+                "[resourceId('Microsoft.Network/routeTables','spoke-rt')]"
             ],
             "properties": {
                 "addressPrefix": "192.168.2.0/25",
                 "delegations": [],
                 "privateEndpointNetworkPolicies": "Enabled",
-                "privateLinkServiceNetworkPolicies": "Enabled"
+                "privateLinkServiceNetworkPolicies": "Enabled",
+                "routeTable": {
+                    "id": "[resourceId('Microsoft.Network/routeTables','spoke-rt')]"
+                }
             }
         },
         {
@@ -786,7 +798,7 @@
             "properties": {
                     "allowForwardedTraffic": true,
                     "allowGatewayTransit": true,
-                    "allowVirtualNetworkAccess": true,
+                    "allowVirtualNetworkAccess": false,
                     "useRemoteGateways": true,
                     "remoteVirtualNetwork": {
                         "id": "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_hub_name'))]"
@@ -806,7 +818,7 @@
                     "allowForwardedTraffic": true,
                     "allowGatewayTransit": true,
                     "allowVirtualNetworkAccess": true,
-                    "useRemoteGateways": true,
+                    "useRemoteGateways": false,
                     "remoteVirtualNetwork": {
                     "id":"[resourceId('Microsoft.Network/virtualNetworks',parameters('virtualNetworks_qatar_2_name'))]"
                     }
@@ -824,7 +836,7 @@
             "properties": {
                     "allowForwardedTraffic": true,
                     "allowGatewayTransit": true,
-                    "allowVirtualNetworkAccess": true,
+                    "allowVirtualNetworkAccess": false,
                     "useRemoteGateways": true,
                     "remoteVirtualNetwork":{
                     "id": "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_hub_name'))]"
@@ -844,7 +856,7 @@
                     "allowForwardedTraffic": true,
                     "allowGatewayTransit": true,
                     "allowVirtualNetworkAccess": true,
-                    "useRemoteGateways": true,
+                    "useRemoteGateways": false,
                     "remoteVirtualNetwork": {
                         "id":"[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_1_name'))]"
             }       }
@@ -853,7 +865,7 @@
             "type": "Microsoft.Network/connections",
             "apiVersion": "2019-11-01",
             "name": "[parameters('connections_hub_onprem_name')]",
-            "location": "westeurope",
+            "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_hub_gw_name'))]",
                 "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_onprem_gw_name'))]"
@@ -880,7 +892,7 @@
             "type": "Microsoft.Network/connections",
             "apiVersion": "2019-11-01",
             "name": "[parameters('connections_onprem_hub_name')]",
-            "location": "westeurope",
+            "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_onprem_gw_name'))]",
                 "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_hub_gw_name'))]"
@@ -908,7 +920,7 @@
             "type": "Microsoft.Network/virtualNetworkGateways",
             "apiVersion": "2019-11-01",
             "name": "[parameters('virtualNetworkGateways_qatar_hub_gw_name')]",
-            "location": "westeurope",
+            "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_qatar_hub_gw_pubip_name'))]",
                 "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_qatar_hub_name'), 'GatewaySubnet')]"
@@ -957,7 +969,7 @@
             "type": "Microsoft.Network/virtualNetworkGateways",
             "apiVersion": "2019-11-01",
             "name": "[parameters('virtualNetworkGateways_qatar_onprem_gw_name')]",
-            "location": "westeurope",
+            "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_qatar_onprem_gw_pubip_name'))]",
                 "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_qatar_onprem_name'), 'GatewaySubnet')]"
@@ -1006,7 +1018,7 @@
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2019-11-01",
             "name": "[parameters('networkInterfaces_qatar_1_name')]",
-            "location": "westeurope",
+            "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_qatar_1_ip_name'))]",
                 "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_qatar_1_name'), 'subnet1')]",
@@ -1044,7 +1056,7 @@
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2019-11-01",
             "name": "[parameters('networkInterfaces_qatar_2_name')]",
-            "location": "westeurope",
+            "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_qatar_2_ip_name'))]",
                 "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_qatar_2_name'), 'subnet1')]",
@@ -1082,7 +1094,7 @@
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2019-11-01",
             "name": "[parameters('networkInterfaces_qatar_hub_name')]",
-            "location": "westeurope",
+            "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_qatar_hub_ip_name'))]",
                 "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_qatar_hub_name'), 'subnet1')]",
@@ -1120,7 +1132,7 @@
             "type": "microsoft.devtestlab/schedules",
             "apiVersion": "2018-09-15",
             "name": "[parameters('schedules_shutdown_computevm_qatar_1_name')]",
-            "location": "westeurope",
+            "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_qatar_1_name'))]"
             ],
@@ -1144,7 +1156,7 @@
             "type": "microsoft.devtestlab/schedules",
             "apiVersion": "2018-09-15",
             "name": "[parameters('schedules_shutdown_computevm_qatar_2_name')]",
-            "location": "westeurope",
+            "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_qatar_2_name'))]"
             ],
@@ -1163,11 +1175,12 @@
                 },
                 "targetResourceId": "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_qatar_2_name'))]"
             }
-        },                {
+        },               
+        {
             "type": "microsoft.devtestlab/schedules",
             "apiVersion": "2018-09-15",
             "name": "[parameters('schedules_shutdown_computevm_qatar_hub_name')]",
-            "location": "westeurope",
+            "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_qatar_hub_name'))]"
             ],
@@ -1186,6 +1199,25 @@
                 },
                 "targetResourceId": "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_qatar_hub_name'))]"
             }
-        }
+        },
+        {
+            "type": "Microsoft.Network/routeTables",
+            "apiVersion": "2021-02-01",
+            "name": "spoke-rt",
+            "location": "[parameters('location')]",
+            "properties": {
+                "disableBgpRoutePropagation": false,
+                "routes": [
+                {
+                    "name": "defaultToGW",
+                    "properties": {
+                    "addressPrefix": "0.0.0.0/0",
+                    "hasBgpOverride": false,
+                    "nextHopType": "VirtualNetworkGateway"
+                    }
+                }
+                ]
+            } 
+        }        
     ]
 }
