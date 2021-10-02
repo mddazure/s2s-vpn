@@ -46,6 +46,10 @@
         "defaultValue": "qatar-2",
         "type": "String"
         },
+        "virtualMachines_qonprem_name": {
+        "defaultValue": "qonprem",
+        "type": "String"
+        },        
         "virtualNetworks_qatar_1_name": {
             "defaultValue": "qatar-1",
             "type": "String"
@@ -74,6 +78,10 @@
             "defaultValue": "qatar-2-nic",
             "type": "String"
         },
+        "networkInterfaces_qonprem_name": {
+            "defaultValue": "qonprem-nic",
+            "type": "String"
+        },
         "publicIPAddresses_qatar_1_ip_name": {
             "defaultValue": "qatar-1-ip",
             "type": "String"
@@ -98,6 +106,14 @@
             "defaultValue": "qatar-1-nsg",
             "type": "String"
         },
+        "networkSecurityGroups_qatar_2_nsg_name": {
+            "defaultValue": "qatar-2-nsg",
+            "type": "String"
+        },
+        "networkSecurityGroups_qonprem_nsg_name": {
+            "defaultValue": "qonprem-nsg",
+            "type": "String"
+        },
         "publicIPAddresses_qatar_1_gw_pubip_name": {
             "defaultValue": "qatar-1-gw-pubip",
             "type": "String"
@@ -106,6 +122,10 @@
             "defaultValue": "qatar-2-gw-pubip",
             "type": "String"
         },
+        "publicIPAddresses_qonprem_ip_name": {
+            "defaultValue": "qonprem-pubip",
+            "type": "String"
+        },     
         "networkSecurityGroups_qatar_hub_nsg_name": {
             "defaultValue": "qatar-hub-nsg",
             "type": "String"
@@ -133,22 +153,6 @@
         "conn_shared_key": {
             "defaultValue": "s2svpn",
             "type": "String"
-        },
-         "schedules_shutdown_computevm_qatar_1_name": {
-            "defaultValue": "shutdown-computevm-qatar-1",
-            "type": "String"
-        },
-         "schedules_shutdown_computevm_qatar_2_name": {
-            "defaultValue": "shutdown-computevm-qatar-2",
-            "type": "String"
-        },
-        "schedules_shutdown_computevm_qatar_hub_name": {
-            "defaultValue": "shutdown-computevm-qatar-hub",
-            "type": "String"
-        },
-        "schedules_shutdown_computevm_qatar_onprem_name": {
-            "defaultValue": "shutdown-computevm-qatar-onprem",
-            "type": "String"
         }
     },
     "variables": {
@@ -169,10 +173,115 @@
                             "protocol": "TCP",
                             "sourcePortRange": "*",
                             "destinationPortRange": "3389",
-                            "sourceAddressPrefix": "*",
+                            "sourceAddressPrefix": "217.122.0.0/16",
                             "destinationAddressPrefix": "*",
                             "access": "Allow",
                             "priority": 300,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "HTTP",
+                        "properties": {
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "80",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 310,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    }
+                ]
+            }
+        },
+                {
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "apiVersion": "2019-11-01",
+            "name": "[parameters('networkSecurityGroups_qatar_2_nsg_name')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "RDP",
+                        "properties": {
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "3389",
+                            "sourceAddressPrefix": "217.122.0.0/16",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 300,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "HTTP",
+                        "properties": {
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "80",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 310,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "apiVersion": "2019-11-01",
+            "name": "[parameters('networkSecurityGroups_qonprem_nsg_name')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "RDP",
+                        "properties": {
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "3389",
+                            "sourceAddressPrefix": "217.122.0.0/16",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 300,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "HTTP",
+                        "properties": {
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "80",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 310,
                             "direction": "Inbound",
                             "sourcePortRanges": [],
                             "destinationPortRanges": [],
@@ -196,10 +305,27 @@
                             "protocol": "TCP",
                             "sourcePortRange": "*",
                             "destinationPortRange": "3389",
-                            "sourceAddressPrefix": "*",
+                            "sourceAddressPrefix": "217.122.0.0/16",
                             "destinationAddressPrefix": "*",
                             "access": "Allow",
                             "priority": 300,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "HTTP",
+                        "properties": {
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "80",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 310,
                             "direction": "Inbound",
                             "sourcePortRanges": [],
                             "destinationPortRanges": [],
@@ -304,6 +430,21 @@
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2019-11-01",
             "name": "[parameters('publicIPAddresses_qatar_onprem_gw_pubip_name')]",
+            "location": "[parameters('location')]",
+            "sku": {
+                "name": "Basic"
+            },
+            "properties": {
+                "publicIPAddressVersion": "IPv4",
+                "publicIPAllocationMethod": "Dynamic",
+                "idleTimeoutInMinutes": 4,
+                "ipTags": []
+            }
+        },
+        {
+            "type": "Microsoft.Network/publicIPAddresses",
+            "apiVersion": "2019-11-01",
+            "name": "[parameters('publicIPAddresses_qonprem_ip_name')]",
             "location": "[parameters('location')]",
             "sku": {
                 "name": "Basic"
@@ -597,6 +738,79 @@
             ]
         },
         {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2019-07-01",
+            "name": "[parameters('virtualMachines_qonprem_name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_qonprem_name'))]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_DS2_v2"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "id": "subscriptions/0245be41-c89b-4b46-a3cc-a705c90cd1e8/resourceGroups/image-gallery-rg/providers/Microsoft.Compute/galleries/mddimagegallery/images/windows2019-networktools/versions/2.0.0"
+                    },
+                    "osDisk": {
+                        "osType": "Windows",
+                        "name": "[concat(parameters('virtualMachines_qonprem_name'), 'Disk1')]",
+                        "createOption": "FromImage",
+                        "caching": "ReadWrite",
+                        "managedDisk": {
+                            "storageAccountType": "Premium_LRS"
+                        },
+                        "diskSizeGB": 127
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_qonprem_name')]",
+                    "adminUsername": "[parameters('userName')]",
+                    "adminPassword":"[parameters('userPassword')]",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_qonprem_name'))]"
+                        }
+                    ]
+                },
+                "priority": "Spot",
+                "evictionPolicy": "Deallocate",
+                "billingProfile": {
+                    "maxPrice": -1
+                }
+            },
+            "resources":[
+                {
+                "type": "extensions",
+                "apiVersion": "2019-07-01",
+                "name": "iis",
+                "dependsOn":["[concat('Microsoft.Compute/virtualMachines/',parameters('virtualMachines_qonprem_name'))]"],
+                "location": "[parameters('location')]",
+                "properties":{
+                    "publisher": "Microsoft.Compute",
+                    "type": "CustomScriptExtension",
+                    "typeHandlerVersion": "1.9",
+                    "autoUpgradeMinorVersion":true,
+                    "protectedSettings":{},
+                    "settings": {
+                        "commandToExecute":"powershell -ExecutionPolicy Unrestricted Add-WindowsFeature Web-Server; powershell -ExecutionPolicy Unrestricted Add-Content -Path \"C:\\inetpub\\wwwroot\\Default.htm\" -Value $($env:computername)"
+                    }
+                }   
+            }
+            ]
+        },
+        
+        {
             "type": "Microsoft.Network/connections",
             "apiVersion": "2019-11-01",
             "name": "[parameters('connections_remote_onprem_name')]",
@@ -622,50 +836,7 @@
                 "expressRouteGatewayBypass": false
             }
         },
-        {
-            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-            "apiVersion": "2019-11-01",
-            "name": "[concat(parameters('networkSecurityGroups_qatar_1_nsg_name'), '/RDP')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_qatar_1_nsg_name'))]"
-            ],
-            "properties": {
-                "protocol": "TCP",
-                "sourcePortRange": "*",
-                "destinationPortRange": "3389",
-                "sourceAddressPrefix": "*",
-                "destinationAddressPrefix": "*",
-                "access": "Allow",
-                "priority": 300,
-                "direction": "Inbound",
-                "sourcePortRanges": [],
-                "destinationPortRanges": [],
-                "sourceAddressPrefixes": [],
-                "destinationAddressPrefixes": []
-            }
-        },
-        {
-            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-            "apiVersion": "2019-11-01",
-            "name": "[concat(parameters('networkSecurityGroups_qatar_hub_nsg_name'), '/RDP')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_qatar_hub_nsg_name'))]"
-            ],
-            "properties": {
-                "protocol": "TCP",
-                "sourcePortRange": "*",
-                "destinationPortRange": "3389",
-                "sourceAddressPrefix": "*",
-                "destinationAddressPrefix": "*",
-                "access": "Allow",
-                "priority": 300,
-                "direction": "Inbound",
-                "sourcePortRanges": [],
-                "destinationPortRanges": [],
-                "sourceAddressPrefixes": [],
-                "destinationAddressPrefixes": []
-            }
-        },
+
         {
             "type": "Microsoft.Network/virtualNetworks/subnets",
             "apiVersion": "2019-11-01",
@@ -728,7 +899,8 @@
             "name": "[concat(parameters('virtualNetworks_qatar_1_name'), '/subnet1')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_1_name'))]",
-                "[resourceId('Microsoft.Network/routeTables','spoke-rt')]"
+                "[resourceId('Microsoft.Network/routeTables','spoke-rt')]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_qatar_1_nsg_name'))]"
             ],
             "properties": {
                 "addressPrefix": "192.168.1.0/25",
@@ -737,6 +909,9 @@
                 "privateLinkServiceNetworkPolicies": "Enabled",
                 "routeTable": {
                     "id": "[resourceId('Microsoft.Network/routeTables','spoke-rt')]"
+                },
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_qatar_1_nsg_name'))]"
                 }
             }
         },
@@ -745,13 +920,17 @@
             "apiVersion": "2019-11-01",
             "name": "[concat(parameters('virtualNetworks_qatar_hub_name'), '/subnet1')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_hub_name'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_hub_name'))]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_qatar_hub_nsg_name'))]"
             ],
             "properties": {
                 "addressPrefix": "192.168.0.0/25",
                 "delegations": [],
                 "privateEndpointNetworkPolicies": "Enabled",
-                "privateLinkServiceNetworkPolicies": "Enabled"
+                "privateLinkServiceNetworkPolicies": "Enabled",
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_qatar_hub_nsg_name'))]"
+                }
             }
         },
         {
@@ -759,13 +938,17 @@
             "apiVersion": "2019-11-01",
             "name": "[concat(parameters('virtualNetworks_qatar_onprem_name'), '/subnet1')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_onprem_name'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_onprem_name'))]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_qonprem_nsg_name'))]"
             ],
             "properties": {
                 "addressPrefix": "192.168.100.0/25",
                 "delegations": [],
                 "privateEndpointNetworkPolicies": "Enabled",
-                "privateLinkServiceNetworkPolicies": "Enabled"
+                "privateLinkServiceNetworkPolicies": "Enabled",
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_qonprem_nsg_name'))]"
+                }
             }
         },
         {
@@ -774,7 +957,8 @@
             "name": "[concat(parameters('virtualNetworks_qatar_2_name'), '/subnet1')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_2_name'))]",
-                "[resourceId('Microsoft.Network/routeTables','spoke-rt')]"
+                "[resourceId('Microsoft.Network/routeTables','spoke-rt')]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_qatar_1_nsg_name'))]"
             ],
             "properties": {
                 "addressPrefix": "192.168.2.0/25",
@@ -783,6 +967,9 @@
                 "privateLinkServiceNetworkPolicies": "Enabled",
                 "routeTable": {
                     "id": "[resourceId('Microsoft.Network/routeTables','spoke-rt')]"
+                },
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_qatar_1_nsg_name'))]"
                 }
             }
         },
@@ -1021,8 +1208,7 @@
             "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_qatar_1_ip_name'))]",
-                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_qatar_1_name'), 'subnet1')]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_qatar_1_nsg_name'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_qatar_1_name'), 'subnet1')]"
             ],
             "properties": {
                 "ipConfigurations": [
@@ -1046,21 +1232,17 @@
                     "dnsServers": []
                 },
                 "enableAcceleratedNetworking": false,
-                "enableIPForwarding": false,
-                "networkSecurityGroup": {
-                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_qatar_1_nsg_name'))]"
-                }
+                "enableIPForwarding": false
             }
         },
-                {
+        {
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2019-11-01",
             "name": "[parameters('networkInterfaces_qatar_2_name')]",
             "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_qatar_2_ip_name'))]",
-                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_qatar_2_name'), 'subnet1')]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_qatar_1_nsg_name'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_qatar_2_name'), 'subnet1')]"
             ],
             "properties": {
                 "ipConfigurations": [
@@ -1084,10 +1266,7 @@
                     "dnsServers": []
                 },
                 "enableAcceleratedNetworking": false,
-                "enableIPForwarding": false,
-                "networkSecurityGroup": {
-                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_qatar_1_nsg_name'))]"
-                }
+                "enableIPForwarding": false
             }
         },
         {
@@ -1097,8 +1276,7 @@
             "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_qatar_hub_ip_name'))]",
-                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_qatar_hub_name'), 'subnet1')]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_qatar_hub_nsg_name'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_qatar_hub_name'), 'subnet1')]"
             ],
             "properties": {
                 "ipConfigurations": [
@@ -1122,82 +1300,41 @@
                     "dnsServers": []
                 },
                 "enableAcceleratedNetworking": true,
-                "enableIPForwarding": false,
-                "networkSecurityGroup": {
-                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_qatar_hub_nsg_name'))]"
-                }
+                "enableIPForwarding": false
             }
         },
                 {
-            "type": "microsoft.devtestlab/schedules",
-            "apiVersion": "2018-09-15",
-            "name": "[parameters('schedules_shutdown_computevm_qatar_1_name')]",
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2019-11-01",
+            "name": "[parameters('networkInterfaces_qonprem_name')]",
             "location": "[parameters('location')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_qatar_1_name'))]"
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_qonprem_ip_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_qatar_onprem_name'), 'subnet1')]"
             ],
             "properties": {
-                "status": "Enabled",
-                "taskType": "ComputeVmShutdownTask",
-                "dailyRecurrence": {
-                    "time": "1900"
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAddress": "192.168.0.4",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_qonprem_ip_name'))]"
+                            },
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_qatar_onprem_name'), 'subnet1')]"
+                            },
+                            "primary": true,
+                            "privateIPAddressVersion": "IPv4"
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
                 },
-                "timeZoneId": "UTC",
-                "notificationSettings": {
-                    "status": "Disabled",
-                    "timeInMinutes": 30,
-                    "emailRecipient": "mddazure@gmail.com",
-                    "notificationLocale": "en"
-                },
-                "targetResourceId": "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_qatar_1_name'))]"
-            }
-        },
-                        {
-            "type": "microsoft.devtestlab/schedules",
-            "apiVersion": "2018-09-15",
-            "name": "[parameters('schedules_shutdown_computevm_qatar_2_name')]",
-            "location": "[parameters('location')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_qatar_2_name'))]"
-            ],
-            "properties": {
-                "status": "Enabled",
-                "taskType": "ComputeVmShutdownTask",
-                "dailyRecurrence": {
-                    "time": "1900"
-                },
-                "timeZoneId": "UTC",
-                "notificationSettings": {
-                    "status": "Disabled",
-                    "timeInMinutes": 30,
-                    "emailRecipient": "mddazure@gmail.com",
-                    "notificationLocale": "en"
-                },
-                "targetResourceId": "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_qatar_2_name'))]"
-            }
-        },               
-        {
-            "type": "microsoft.devtestlab/schedules",
-            "apiVersion": "2018-09-15",
-            "name": "[parameters('schedules_shutdown_computevm_qatar_hub_name')]",
-            "location": "[parameters('location')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_qatar_hub_name'))]"
-            ],
-            "properties": {
-                "status": "Enabled",
-                "taskType": "ComputeVmShutdownTask",
-                "dailyRecurrence": {
-                    "time": "1900"
-                },
-                "timeZoneId": "UTC",
-                "notificationSettings": {
-                    "status": "Disabled",
-                    "timeInMinutes": 30,
-                    "emailRecipient": "mddazure@gmail.com",
-                    "notificationLocale": "en"
-                },
-                "targetResourceId": "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_qatar_hub_name'))]"
+                "enableAcceleratedNetworking": true,
+                "enableIPForwarding": false
             }
         },
         {
@@ -1214,6 +1351,14 @@
                     "addressPrefix": "0.0.0.0/0",
                     "hasBgpOverride": false,
                     "nextHopType": "VirtualNetworkGateway"
+                    }
+                },
+                                {
+                    "name": "homeToInternet",
+                    "properties": {
+                    "addressPrefix": "217.122.0.0/16",
+                    "hasBgpOverride": false,
+                    "nextHopType": "Internet"
                     }
                 }
                 ]
