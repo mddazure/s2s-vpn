@@ -14,6 +14,10 @@
             "defaultValue": "westeurope",
             "type": "string"
         },
+        "location_onprem":{
+            "defaultValue": "northeurope",
+            "type": "string"
+        },
         "peers_1_hub_name": {
             "defaultValue": "1-hub",
             "type": "String"
@@ -252,7 +256,7 @@
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2019-11-01",
             "name": "[parameters('networkSecurityGroups_qonprem_nsg_name')]",
-            "location": "[parameters('location')]",
+            "location": "[parameters('location_onprem')]",
             "properties": {
                 "securityRules": [
                     {
@@ -430,7 +434,7 @@
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2019-11-01",
             "name": "[parameters('publicIPAddresses_qatar_onprem_gw_pubip_name')]",
-            "location": "[parameters('location')]",
+            "location": "[parameters('location_onprem')]",
             "sku": {
                 "name": "Basic"
             },
@@ -445,7 +449,7 @@
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2019-11-01",
             "name": "[parameters('publicIPAddresses_qonprem_ip_name')]",
-            "location": "[parameters('location')]",
+            "location": "[parameters('location_onprem')]",
             "sku": {
                 "name": "Basic"
             },
@@ -508,7 +512,7 @@
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2019-11-01",
             "name": "[parameters('virtualNetworks_qatar_onprem_name')]",
-            "location": "[parameters('location')]",
+            "location": "[parameters('location_onprem')]",
             "properties": {
                 "addressSpace": {
                     "addressPrefixes": [
@@ -741,7 +745,7 @@
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2019-07-01",
             "name": "[parameters('virtualMachines_qonprem_name')]",
-            "location": "[parameters('location')]",
+            "location": "[parameters('location_onprem')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_qonprem_name'))]"
             ],
@@ -814,7 +818,7 @@
             "type": "Microsoft.Network/connections",
             "apiVersion": "2019-11-01",
             "name": "[parameters('connections_remote_onprem_name')]",
-            "location": "[parameters('location')]",
+            "location": "[parameters('location_onprem')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_onprem_gw_name'))]"
             ],
@@ -1079,7 +1083,7 @@
             "type": "Microsoft.Network/connections",
             "apiVersion": "2019-11-01",
             "name": "[parameters('connections_onprem_hub_name')]",
-            "location": "[parameters('location')]",
+            "location": "[parameters('location_onprem')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_onprem_gw_name'))]",
                 "[resourceId('Microsoft.Network/virtualNetworkGateways', parameters('virtualNetworkGateways_qatar_hub_gw_name'))]"
@@ -1156,7 +1160,7 @@
             "type": "Microsoft.Network/virtualNetworkGateways",
             "apiVersion": "2019-11-01",
             "name": "[parameters('virtualNetworkGateways_qatar_onprem_gw_name')]",
-            "location": "[parameters('location')]",
+            "location": "[parameters('location_onprem')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_qatar_onprem_gw_pubip_name'))]",
                 "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_qatar_onprem_name'), 'GatewaySubnet')]"
@@ -1307,7 +1311,7 @@
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2019-11-01",
             "name": "[parameters('networkInterfaces_qonprem_name')]",
-            "location": "[parameters('location')]",
+            "location": "[parameters('location_onprem')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_qonprem_ip_name'))]",
                 "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_qatar_onprem_name'), 'subnet1')]"
