@@ -3,8 +3,8 @@ features {}
 }
 #Create a resource group
 resource "azurerm_resource_group" "rg" {
-  name     = "s2srg-2"
-  location = "West Central US"
+  name     = "s2srg"
+  location = "West Europe"
 }
 
 # Create a virtual network within the resource group
