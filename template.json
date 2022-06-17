@@ -7,18 +7,50 @@
          "defaultValue": "192.168.1.0/24",
          "type": "string"
         },
+        "q1_vnet_GatewaySubnet":{
+        "defaultValue": "192.168.1.128/27",
+        "type": "string"
+        },
+        "q1_vnet_subnet1":{
+        "defaultValue": "192.168.1.0/25",
+        "type": "string"
+        },    
         "q2_vnet_address_space":{
             "defaultValue": "192.168.2.0/24",
             "type": "string"
         },
+        "q2_vnet_GatewaySubnet":{
+        "defaultValue": "192.168.2.128/27",
+        "type": "string"
+        },
+        "q2_vnet_subnet1":{
+        "defaultValue": "192.168.2.0/25",
+        "type": "string"
+        }, 
         "qhub_vnet_address_space":{
             "defaultValue": "192.168.0.0/24",
             "type": "string"
         },
+        "qhub_vnet_GatewaySubnet":{
+        "defaultValue": "192.168.0.128/27",
+        "type": "string"
+        },
+        "qhub_vnet_subnet1":{
+        "defaultValue": "192.168.0.0/25",
+        "type": "string"
+        }, 
         "qonprem_vnet_address_space":{
             "defaultValue": "192.168.100.0/24",
             "type": "string"
         },
+        "qonprem_vnet_GatewaySubnet":{
+        "defaultValue": "192.168.100.128/27",
+        "type": "string"
+        },
+        "qonprem_vnet_subnet1":{
+        "defaultValue": "192.168.100.0/25",
+        "type": "string"
+        }, 
         "userName": {
             "defaultValue":"marc",
             "type":"String"
@@ -695,7 +727,7 @@
                 "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_1_name'))]"
             ],
             "properties": {
-                "addressPrefix": "192.168.1.128/28",
+                "addressPrefix": "[parameters('q1_vnet_GatewaySubnet')]",
                 "delegations": [],
                 "privateEndpointNetworkPolicies": "Enabled",
                 "privateLinkServiceNetworkPolicies": "Enabled"
@@ -709,7 +741,7 @@
                 "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_2_name'))]"
             ],
             "properties": {
-                "addressPrefix": "192.168.2.128/28",
+                "addressPrefix": "[parameters('q2_vnet_GatewaySubnet')]",
                 "delegations": [],
                 "privateEndpointNetworkPolicies": "Enabled",
                 "privateLinkServiceNetworkPolicies": "Enabled"
@@ -723,7 +755,7 @@
                 "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_hub_name'))]"
             ],
             "properties": {
-                "addressPrefix": "192.168.0.128/28",
+                "addressPrefix": "[parameters('qhub_vnet_GatewaySubnet')]",
                 "delegations": [],
                 "privateEndpointNetworkPolicies": "Enabled",
                 "privateLinkServiceNetworkPolicies": "Enabled"
@@ -737,7 +769,7 @@
                 "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_onprem_name'))]"
             ],
             "properties": {
-                "addressPrefix": "192.168.100.128/28",
+                "addressPrefix": "[parameters('qonprem_vnet_GatewaySubnet')]",
                 "delegations": [],
                 "privateEndpointNetworkPolicies": "Enabled",
                 "privateLinkServiceNetworkPolicies": "Enabled"
@@ -751,7 +783,7 @@
                 "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_1_name'))]"
             ],
             "properties": {
-                "addressPrefix": "192.168.1.0/25",
+                "addressPrefix": "[parameters('q1_vnet_subnet1')]",
                 "delegations": [],
                 "privateEndpointNetworkPolicies": "Enabled",
                 "privateLinkServiceNetworkPolicies": "Enabled"
@@ -765,7 +797,7 @@
                 "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_hub_name'))]"
             ],
             "properties": {
-                "addressPrefix": "192.168.0.0/25",
+                "addressPrefix": "[parameters('qhub_vnet_subnet1')]",
                 "delegations": [],
                 "privateEndpointNetworkPolicies": "Enabled",
                 "privateLinkServiceNetworkPolicies": "Enabled"
@@ -779,7 +811,7 @@
                 "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_onprem_name'))]"
             ],
             "properties": {
-                "addressPrefix": "192.168.100.0/25",
+                "addressPrefix": "[parameters('qonprem_vnet_subnet1')]",
                 "delegations": [],
                 "privateEndpointNetworkPolicies": "Enabled",
                 "privateLinkServiceNetworkPolicies": "Enabled"
@@ -793,7 +825,7 @@
                 "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_qatar_2_name'))]"
             ],
             "properties": {
-                "addressPrefix": "192.168.2.0/25",
+                "addressPrefix": "[parameters('q2_vnet_subnet1')]",
                 "delegations": [],
                 "privateEndpointNetworkPolicies": "Enabled",
                 "privateLinkServiceNetworkPolicies": "Enabled"
