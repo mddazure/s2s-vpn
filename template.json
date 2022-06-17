@@ -2,6 +2,23 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        
+        "q1_vnet_address_space":{
+         "defaultValue": "192.168.1.0/24",
+         "type": "string"
+        },
+        "q2_vnet_address_space":{
+            "defaultValue": "192.168.2.0/24",
+            "type": "string"
+        },
+        "qhub_vnet_address_space":{
+            "defaultValue": "192.168.0.0/24",
+            "type": "string"
+        },
+        "qonprem_vnet_address_space":{
+            "defaultValue": "192.168.100.0/24",
+            "type": "string"
+        },
         "userName": {
             "defaultValue":"marc",
             "type":"String"
@@ -327,7 +344,7 @@
             "properties": {
                 "addressSpace": {
                     "addressPrefixes": [
-                        "192.168.1.0/24"
+                        "[parameters('q1_vnet_address_space')]"
                     ]
                 },
                 "virtualNetworkPeerings": [],
@@ -343,7 +360,7 @@
             "properties": {
                 "addressSpace": {
                     "addressPrefixes": [
-                        "192.168.2.0/24"
+                        "[parameters('q2_vnet_address_space')]"
                     ]
                 },
                 "virtualNetworkPeerings": [],
@@ -359,7 +376,7 @@
             "properties": {
                 "addressSpace": {
                     "addressPrefixes": [
-                        "192.168.0.0/24"
+                        "[parameters('qhub_vnet_address_space')]"
                     ]
                 },
                 "virtualNetworkPeerings": [],
@@ -375,7 +392,7 @@
             "properties": {
                 "addressSpace": {
                     "addressPrefixes": [
-                        "192.168.100.0/24"
+                        "[parameters('qonprem_vnet_address_space')]"
                     ]
                 },
                 "virtualNetworkPeerings": [],

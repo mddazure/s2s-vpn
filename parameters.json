@@ -2,6 +2,18 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "q1_vnet_address_space":{
+            "value": "192.168.1.0/24"
+        },
+        "q2_vnet_address_space":{
+            "value": "192.168.2.0/24"
+        },
+        "qhub_vnet_address_space":{
+            "value": "192.168.0.0/24"
+        },
+        "qonprem_vnet_address_space":{
+            "value": "192.168.100.0/24"
+        },
         "connections_1_hub_name": {
             "value": null
         },
